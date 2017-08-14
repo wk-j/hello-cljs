@@ -77,6 +77,13 @@
 (false?  (#(if (contains? %2 %1) (= nil (get %2 %1)) false) :b {:a nil :b 2}))
 (false?  (#(if (contains? %2 %1) (= nil (get %2 %1)) false) :c {:a nil :b 2}))
 
+
+(defn nil-key? [k m]
+  (and (contains? m k)
+       (nil? (m k))))
+(nil-key? :a {:a nil})
+
+
 ;; Logical falsity and truth
 (= 1 (if-not false 1 0))
 (= 1 (if-not nil 1 0))
@@ -92,17 +99,9 @@
 (clojure.set/superset? #{1 2 3} #{1 2})
 (clojure.set/subset? #{1 2} #{1 2 3})
 
-;; Intro to destructuring
+;; 52 Intro to destructuring
 (= [2 4] (let [[a b c d e] [ 0 1 2 3 4]] [c e]))
 
-;; Map default
-(interleave [1 2 3 4])
-(interleave [1 2 3 4] (repeat [1 1]))
-
-;;
-(= (#(apply hash-map (interleave %2 (repeat %))) 0 [:a :b :c]) {:a 0 :b 0 :c 0})
-(= (#(apply hash-map (interleave %2 (repeat %))) "x" [1 2 3]) {1 "x" 2 "x" 3 "x"})
-(= (#(apply hash-map (interleave %2 (repeat %))) [:a :b] [:foo :bar]) {:foo [:a :b] :bar [:a :b]})
 
 ;; Last element
 (= (last [1 2 3 4 5]) 5)
@@ -162,7 +161,22 @@
 (= 10 (let [x 7 y 3 z 1] (+ x y)))
 
 
+;; 65 Black box testing
 
+
+;; 156 Map default
+(interleave [1 2 3 4])
+(interleave [1 2 3 4] (repeat [1 1]))
+;;
+(= (#(apply hash-map (interleave %2 (repeat %))) 0 [:a :b :c]) {:a 0 :b 0 :c 0})
+(= (#(apply hash-map (interleave %2 (repeat %))) "x" [1 2 3]) {1 "x" 2 "x" 3 "x"})
+(= (#(apply hash-map (interleave %2 (repeat %))) [:a :b] [:foo :bar]) {:foo [:a :b] :bar [:a :b]})
+
+
+(defn df [v ks]
+  (zipmap ks (repeat v)))
+
+(df 0 [1 2 3])
 
 lein repl
 (exit)
