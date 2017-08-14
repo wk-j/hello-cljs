@@ -43,3 +43,25 @@
 (= 8 ((fn [x] (+ x 5)) 3))
 (= 8 (#(+ % 5) 3))
 (= 8 ((partial + 5) 3))
+
+;; Double down
+(= (#(* % 2) 2) 4)
+(= (#(* % 2) 3) 6)
+(= (#(* % 2) 11) 22)
+(= (#(* % 2) 7) 14)
+
+; Hello world
+(= (#(str "Hello, " % "!") "Dave") "Hello, Dave!")
+(= (#(str "Hello, " % "!") "Jenn") "Hello, Jenn!")
+(= (#(str "Hello, " % "!") "Rhea") "Hello, Rhea!")
+
+;; Sequences map
+(= '(6 7 8) (map #(+ % 5) '(1 2 3)))
+
+;; Sequence filter
+(= '(6 7) (filter #(> % 5) '(3 4 5 6 7)))
+
+;; Intro to reduce
+(= 15 (reduce + [1 2 3 4 5]))
+(= 0 (reduce + []))
+(= 6 (reduce + 1 [2 3]))
