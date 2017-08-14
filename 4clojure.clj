@@ -88,3 +88,13 @@
 
 ;; Intro to destructuring
 (= [2 4] (let [[a b c d e] [ 0 1 2 3 4]] [c e]))
+
+;; Map default
+(interleave [1 2 3 4])
+(interleave [1 2 3 4] (repeat [1 1]))
+
+;;
+(= (#(apply hash-map (interleave %2 (repeat %))) 0 [:a :b :c]) {:a 0 :b 0 :c 0})
+(= (#(apply hash-map (interleave %2 (repeat %))) "x" [1 2 3]) {1 "x" 2 "x" 3 "x"})
+(= (#(apply hash-map (interleave %2 (repeat %))) [:a :b] [:foo :bar]) {:foo [:a :b] :bar [:a :b]})
+
