@@ -65,3 +65,26 @@
 (= 15 (reduce + [1 2 3 4 5]))
 (= 0 (reduce + []))
 (= 6 (reduce + 1 [2 3]))
+
+;; A nil key
+(true?  (#(if (contains? %2 %1) (= nil (get %2 %1)) false) :a {:a nil :b 2}))
+(false?  (#(if (contains? %2 %1) (= nil (get %2 %1)) false) :b {:a nil :b 2}))
+(false?  (#(if (contains? %2 %1) (= nil (get %2 %1)) false) :c {:a nil :b 2}))
+
+;; Logical falsity and truth
+(= 1 (if-not false 1 0))
+(= 1 (if-not nil 1 0))
+(= 1 (if true 1 0))
+(= 1 (if [] 1 0))
+(= 1 (if [0] 1 0))
+(= 1 (if 0 1 0))
+(= 1 (if 1 1 0))
+
+;; Subset and superset
+(clojure.set/superset? #{1 2 3} #{2})
+(clojure.set/subset? #{1} #{1 2 3})
+(clojure.set/superset? #{1 2 3} #{1 2})
+(clojure.set/subset? #{1 2} #{1 2 3})
+
+;; Intro to destructuring
+(= [2 4] (let [[a b c d e] [ 0 1 2 3 4]] [c e]))
