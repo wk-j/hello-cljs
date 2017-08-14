@@ -145,14 +145,24 @@
 (= (#(mapcat (partial repeat %2) %1) [1 2 3] 2) '(1 1 2 2 3 3))
 
 ;; 34 Implement range
-;; TODO
 (defn positive-numbers [n] (lazy-seq (cons n (positive-numbers (inc n)))))
-(take 5 (positive-numbers 0))
-(= #(take %1 ((fn ra [n] (lazy-seq (cons n (ra inc n)))) %2) 1 4) '(1 2 3))
-(#(take 2 ((fn ra [n] (lazy-seq (cons n (ra inc n)))) 5)))
+(take 5 (positive-numbers 1))
+
+(#(take (- %2 %1) 
+    ((fn pn [n]
+           (lazy-seq (cons n (pn (+ n 1)))))
+     %1))    
+ 1 4)
+
 
 ;; 35 Local binding
 (= 7 (let [x 5] (+ 2 x)))
 
 ;; 36 Let it be
 (= 10 (let [x 7 y 3 z 1] (+ x y)))
+
+
+
+
+lein repl
+(exit)
