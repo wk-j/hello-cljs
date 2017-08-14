@@ -1,33 +1,39 @@
-;; Intro to string
+;; 1 Nothing but the truth
+(= true true)
+
+;; 2 Simple match
+(= (- 10 (* 2 3)) 4)
+
+;; 3 Intro to string
 (= "HELLO WORLD" (.toUpperCase "hello world"))
 
-;; Intro to lists
+;; 4 Intro to lists
 (= (list :a :b :c) '(:a :b :c))
 
-;; List conj
+;; 5 List conj
 (= (list 1 2 3 4) (conj '(2 3 4) 1))
 (= (list 1 2 3 4) (conj '( 3 4) 2 1))
 
-;; Intro to vector
+;; 6 Intro to vector
 (= [:a :b :c] (vec '(:a :b :c)) (vector :a :b :c))
 
-;; Vector conj
+;; 7 Vector conj
 (= [1 2 3 4] (conj [1 2 3] 4))
 (= [1 2 3 4] (conj [1 2] 3 4))
 
-;; Intro to set
+;; 8 Intro to set
 (= #{:a :b :c :d} (set '(:a :a :b :c :c :c :c :d :d)))
 (= #{:a :b :c :d} (clojure.set/union #{:a :b :c} #{:b :c :d}))
 
-;; Set conj
+;; 9 Set conj
 (= #{1 2 3 4} (conj #{1 4 3} 2))
 
-;; Intro to map
+;; 10 Intro to map
 ((hash-map :a 10, :b 20, :c 30) :b)
 (= 20 ((hash-map :a 10, :b 20, :c 30) :b)) 
 (= 20 (:b {:a 10 :b 20 :c 30}))
 
-;; Maps conj
+;; 11 Maps conj
 (= {:a 1 :b 2 :c 3} (conj {:a 1} {:b 2} [:c 3]))
 
 ;; Intro to Sequences
@@ -128,3 +134,25 @@
 (= (reduce + '(0 0 -1)) -1)
 (= (reduce + '(1 10 3)) 14)
 
+;; 25 Find the odd numbers
+(= (filter odd? #{1 2 3 4 5}) '(1 3 5))
+
+;; 26 Fibonacci sequence
+(def fib-seq (lazy-cat [1 1] (map + (rest fib-seq) fib-seq)))
+(take 5 fib-seq)
+
+;; 33 Replicate a sequence
+(= (#(mapcat (partial repeat %2) %1) [1 2 3] 2) '(1 1 2 2 3 3))
+
+;; 34 Implement range
+;; TODO
+(defn positive-numbers [n] (lazy-seq (cons n (positive-numbers (inc n)))))
+(take 5 (positive-numbers 0))
+(= #(take %1 ((fn ra [n] (lazy-seq (cons n (ra inc n)))) %2) 1 4) '(1 2 3))
+(#(take 2 ((fn ra [n] (lazy-seq (cons n (ra inc n)))) 5)))
+
+;; 35 Local binding
+(= 7 (let [x 5] (+ 2 x)))
+
+;; 36 Let it be
+(= 10 (let [x 7 y 3 z 1] (+ x y)))
