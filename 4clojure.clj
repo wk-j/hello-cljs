@@ -98,3 +98,13 @@
 (= (#(apply hash-map (interleave %2 (repeat %))) "x" [1 2 3]) {1 "x" 2 "x" 3 "x"})
 (= (#(apply hash-map (interleave %2 (repeat %))) [:a :b] [:foo :bar]) {:foo [:a :b] :bar [:a :b]})
 
+;; Last element
+(= (last [1 2 3 4 5]) 5)
+(= (last '(5 4 3)) 3)
+(= (last ["b" "c" "d"]) "d")
+
+;; Penultimate element
+(= (#(->> % reverse rest first) (list 1 2 3 4 5)) 4)
+(= (#(->> % reverse rest first) ["a" "b" "c"]) "b") 
+(= (#(->> % reverse rest first) [[1 2] [3 4]]) [1 2])
+
