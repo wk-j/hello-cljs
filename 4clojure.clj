@@ -175,7 +175,6 @@
 
 (defn df [v ks]
   (zipmap ks (repeat v)))
-
 (df 0 [1 2 3])
 
 lein repl
