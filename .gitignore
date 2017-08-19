@@ -14,4 +14,3 @@ pom.xml.asc
 out
 .repl*
 node_modules
-*.js
