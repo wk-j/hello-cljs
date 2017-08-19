@@ -1,1 +1,19 @@
+;; build
 java -cp cljs.jar:src clojure.main build.clj 
+
+;; auto build
+java -cp cljs.jar:src clojure.main watch.clj
+
+;; repl
+java -cp cljs.jar:src clojure.main repl.clj
+
+;;or
+rlwrap java -cp cljs.jar:src clojure.main repl.clj
+
+;; test
+(+ 1 2)
+
+(require '[hello-world.core])
+
+;; production
+java -cp cljs.jar:src clojure.main release.clj
