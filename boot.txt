@@ -23,3 +23,6 @@ java -cp cljs.jar:src clojure.main node.clj
 
 ;; node
 node main.js
+
+;; node repl
+rlwrap java -cp cljs.jar:src clojure.main node_repl.clj
