@@ -17,3 +17,9 @@ rlwrap java -cp cljs.jar:src clojure.main repl.clj
 
 ;; production
 java -cp cljs.jar:src clojure.main release.clj
+
+;; node
+java -cp cljs.jar:src clojure.main node.clj
+
+;; node
+node main.js

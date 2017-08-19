@@ -13,3 +13,5 @@ pom.xml.asc
 .idea
 out
 .repl*
+node_modules
+*.js
